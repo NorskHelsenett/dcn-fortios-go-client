@@ -12,6 +12,7 @@ import (
 	"github.com/NorskHelsenett/ror/pkg/rlog"
 )
 
+// IPv4AddressGroupExists checks if an IPv4 address group exists in FortiGate.
 func (c *FortiClient) IPv4AddressGroupExists(name string) (bool, error) {
 	rlog.Info(fmt.Sprintf("Checking if IPv4 address group '%s' exists on '%s/?vdom=%s'", name, c.baseURL, c.vdom))
 	url := fmt.Sprintf("%s/cmdb/firewall/addrgrp/%s?vdom=%s", c.baseURL, url.PathEscape(name), c.vdom)
@@ -44,6 +45,7 @@ func (c *FortiClient) IPv4AddressGroupExists(name string) (bool, error) {
 	return true, nil
 }
 
+// CreateIPv4AddressGroup creates a new IPv4 address group in FortiGate.
 func (c *FortiClient) CreateIPv4AddressGroup(addressGroup fortiostypes.FortigateAddressGroup) error {
 	rlog.Info(fmt.Sprintf("Creating IPv4 address group '%s' on '%s/?vdom=%s'", addressGroup.Name, c.baseURL, c.vdom))
 	url := fmt.Sprintf("%s/cmdb/firewall/addrgrp/?vdom=%s", c.baseURL, c.vdom)
@@ -76,6 +78,7 @@ func (c *FortiClient) CreateIPv4AddressGroup(addressGroup fortiostypes.Fortigate
 	return nil
 }
 
+// UpdateIPv4AddressGroup updates an existing IPv4 address group in FortiGate.
 func (c *FortiClient) UpdateIPv4AddressGroup(addressGroup fortiostypes.FortigateAddressGroup) error {
 	rlog.Info(fmt.Sprintf("Updating IPv4 address group '%s' on '%s/?vdom=%s'", addressGroup.Name, c.baseURL, c.vdom))
 	url := fmt.Sprintf("%s/cmdb/firewall/addrgrp/%s?vdom=%s", c.baseURL, url.PathEscape(addressGroup.Name), c.vdom)
@@ -108,6 +111,7 @@ func (c *FortiClient) UpdateIPv4AddressGroup(addressGroup fortiostypes.Fortigate
 	return nil
 }
 
+// DeleteIPv4AddressGroup deletes an IPv4 address group from FortiGate.
 func (c *FortiClient) DeleteIPv4AddressGroup(name string) error {
 	rlog.Info(fmt.Sprintf("Deleting IPv4 address group '%s' on '%s/?vdom=%s'", name, c.baseURL, c.vdom))
 	url := fmt.Sprintf("%s/cmdb/firewall/addrgrp/%s?vdom=%s", c.baseURL, url.PathEscape(name), c.vdom)

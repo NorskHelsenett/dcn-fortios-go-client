@@ -12,6 +12,7 @@ import (
 	"github.com/NorskHelsenett/ror/pkg/rlog"
 )
 
+// IPv6AddressExists checks if an IPv6 address object exists in FortiGate.
 func (c *FortiClient) IPv6AddressExists(name string) (bool, error) {
 	rlog.Info(fmt.Sprintf("Checking if IPv6 address '%s' exists on '%s/?vdom=%s'", name, c.baseURL, c.vdom))
 	url := fmt.Sprintf("%s/cmdb/firewall/address6/%s?vdom=%s", c.baseURL, url.PathEscape(name), c.vdom)
@@ -44,6 +45,7 @@ func (c *FortiClient) IPv6AddressExists(name string) (bool, error) {
 	return true, nil
 }
 
+// CreateIPv6Address creates a new IPv6 address object in FortiGate.
 func (c *FortiClient) CreateIPv6Address(address fortiostypes.FortigateIPv6Address) error {
 	rlog.Info(fmt.Sprintf("Creating IPv6 address '%s' on '%s/?vdom=%s'", address.Name, c.baseURL, c.vdom))
 	url := fmt.Sprintf("%s/cmdb/firewall/address6/?vdom=%s", c.baseURL, c.vdom)
@@ -76,6 +78,7 @@ func (c *FortiClient) CreateIPv6Address(address fortiostypes.FortigateIPv6Addres
 	return nil
 }
 
+// DeleteIPv6Address deletes an IPv6 address object from FortiGate.
 func (c *FortiClient) DeleteIPv6Address(name string) error {
 	rlog.Info(fmt.Sprintf("Deleting IPv6 address '%s' on '%s/?vdom=%s'", name, c.baseURL, c.vdom))
 	url := fmt.Sprintf("%s/cmdb/firewall/address6/%s?vdom=%s", c.baseURL, url.PathEscape(name), c.vdom)
